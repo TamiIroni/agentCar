@@ -8,7 +8,7 @@ export const connectToDb = () => {
                    console.log("mongoDB connectrd" + suc.Connection.host);
         })
         .catch(err => {
-            onsole.log("canot connect mongoDB");
+            console.log("canot connect mongoDB");
             console.log(err)
             process.exit(1);
         })

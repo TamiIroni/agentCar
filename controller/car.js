@@ -1,4 +1,5 @@
 import { carModel } from "../models/car.js";
+import {mongoose} from "mongoose";
 
 
 export const getAllCars = async (req, res) => {

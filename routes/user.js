@@ -6,12 +6,12 @@ import {auth, authAdmin} from "../middleWeares/auth.js"
 
 const router = express.Router();
 
-router.get("/", auth, getAllUsers)
+router.get("/", authAdmin, getAllUsers)
 
 router.post("/", addUser)
 
 router.delete("/:id", authAdmin, deletUser)
 
-router.post("/login", auth, loginUser)
+router.post("/login", loginUser)
 
 export default router;

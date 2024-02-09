@@ -4,7 +4,7 @@ export const generateToken = (user) => {
         let jwtSecretKey = process.env.JWT_STRING;
         let data = {
             userName: user.userName,
-            identity: user.identity,
+            password: user.password,
             role: user.role,
             _id: user._id
         };

@@ -1,6 +1,7 @@
 import express from "express";
 import carRouter from "./routes/car.js"
 import userRouter from "./routes/user.js"
+import orderRouter from "./routes/order.js"
 import cors from "cors";
 import { connectToDb } from "./DB/connectToDb.js";
 import {config} from "dotenv";
@@ -15,7 +16,7 @@ connectToDb();
 
 app.use("/api/car", carRouter);
 app.use("/api/user", userRouter);
-app.use("/api/order", userRouter);
+app.use("/api/order", orderRouter);
 
 
 app.use(errorHandling)

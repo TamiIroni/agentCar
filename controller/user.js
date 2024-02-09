@@ -1,5 +1,5 @@
 import { userModel, ValidateUser, ValidateUserLogin } from "../models/user.js";
-import { compare, hash } from "bcrypt";
+import bcryptjs from "bcryptjs";
 import mongoose from "mongoose";
 import { generateToken } from "../DB/generateToken.js"
 
@@ -43,7 +43,7 @@ export const addUser = async (req, res) => {
         let sameUser = await userModel.findOne({ $or: [{ email: email }, { userName: userName }] });
         if (sameUser)
             return res.status(409).send("there is alredy same user");
-        let hashedPassword = await hash(password, 15);
+        let hashedPassword = await bcryptjs.hash(password, 15);
         let newUser = new userModel({ userName, password: hashedPassword, email });
         await newUser.save();
         // let token = generateToken(newUser.userName, newUser._id, newUser.role);
@@ -64,7 +64,7 @@ export const loginUser = async (req, res) => {
     try {
         let isUser = await userModel.findOne({ email: email })
         console.log("isUser:", isUser);
-        if (!isUser || !await compare(password, isUser.password))
+        if (!isUser || !await bcryptjs.compare(password, isUser.password))
             return res.status(400).send("email not exist, no such user, please sign up");
         let token = generateToken(isUser.userName, isUser._id, isUser.role);
             return res.status(200).json({ userName: isUser.userName, role: isUser.role, _id: isUser._id, token })
